@@ -9,17 +9,9 @@ TEST TO ADJUST FORWARD_POWER TO YOUR LIKING
 """
 
 from codrone_edu.drone import *
-# import time
-
-DISTANCE_THRESHOLD = 60  # distance in cm in which an object is acknowledged to exist
-FORWARD_POWER = 15
-# within_a_distance=60
-
-drone = Drone()
-drone.pair()
 
 
-def is_object_detected(within_a_distance):
+def is_object_detected(drone, within_a_distance):
     """
     Returns a True if an object is less than or equal to
     the value passed to within_a_distance; otherwise False.
@@ -27,7 +19,7 @@ def is_object_detected(within_a_distance):
     return drone.get_front_range() <= within_a_distance
 
 
-def avoid_object():
+def avoid_object(drone, forward_power):
     """
     Turns to the left and reads the front range sensor.
     Turns to the right and reads the front range sensor.
@@ -55,24 +47,21 @@ def avoid_object():
     else:
         drone.turn_right(90)
     drone.hover(1)
-    drone.set_pitch(FORWARD_POWER)
+    drone.set_pitch(forward_power)
     drone.move(3)
 
 
-def fly_drone():
+def fly_drone(drone, forward_power, distance_threshold):
     drone.takeoff()
-    drone.set_pitch(FORWARD_POWER)
+    drone.set_pitch(forward_power)
     drone.move()
     try:
         while True:
             drone.move()  # moves forward
-            if is_object_detected(DISTANCE_THRESHOLD):  # if an object is detected within 60 cms
+            if is_object_detected(distance_threshold):  # if an object is detected within 60 cms
                 avoid_object()  # execute avoid_object() function
     except:
         drone.set_pitch(0)  # set pitch to zero so the drone does not move
     finally:
         drone.land()  # when the try statement has concluded, land the drone
         drone.close()  # close the connection
-
-
-fly_drone()
