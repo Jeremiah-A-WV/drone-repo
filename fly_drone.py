@@ -54,7 +54,6 @@ def avoid_object(drone, forward_power):
 def fly_drone(drone, forward_power, distance_threshold):
     drone.takeoff()
     drone.set_pitch(forward_power)
-    drone.move()
     try:
         while True:
             drone.move()  # moves forward
