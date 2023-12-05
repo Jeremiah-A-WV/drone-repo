@@ -8,8 +8,6 @@ the avoid_object function is invoked to take action.
 TEST TO ADJUST FORWARD_POWER TO YOUR LIKING
 """
 
-from codrone_edu.drone import *
-
 
 def is_object_detected(drone, within_a_distance):
     """
@@ -57,9 +55,10 @@ def fly_drone(drone, forward_power, distance_threshold):
     try:
         while True:
             drone.move()  # moves forward
-            if is_object_detected(distance_threshold):  # if an object is detected within 60 cms
-                avoid_object()  # execute avoid_object() function
-    except:
+            if is_object_detected(drone, distance_threshold):  # if an object is detected within 60 cms
+                avoid_object(drone, forward_power)  # execute avoid_object() function
+    except Exception as e:
+        print(e)
         drone.set_pitch(0)  # set pitch to zero so the drone does not move
     finally:
         drone.land()  # when the try statement has concluded, land the drone

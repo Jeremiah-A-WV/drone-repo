@@ -1,10 +1,4 @@
-from codrone_edu.drone import *
-# import time
-
-THROTTLE_POWER = 30
-
-
-def set_altitude(altitude):
+def set_altitude(drone, altitude, throttle):
     height = drone.height_from_pressure()
 
     if altitude <= height:
@@ -12,7 +6,7 @@ def set_altitude(altitude):
     else:
         sign = 1
 
-    drone.set_throttle(sign * THROTTLE_POWER)
+    drone.set_throttle(sign * throttle)
     drone.move()
 
     while sign * altitude > sign * height:
@@ -22,19 +16,16 @@ def set_altitude(altitude):
     drone.set_throttle(0)
 
 
-drone = Drone()
-drone.pair()
-drone.set_initial_pressure()
-try:
-    drone.takeoff()
-    drone.hover(2)
-    set_altitude(40)
-    print('Final Height =', drone.height_from_pressure())
-    drone.hover(2)
-    set_altitude(150)
-    print('Final Height =', drone.height_from_pressure())
-    drone.hover(3)
-except Exception as e:
-    print(e)
-drone.land()
-drone.close()
+def read_final_height(drone, altitude, throttle):
+
+    drone.set_initial_pressure()
+    try:
+        drone.hover(2)
+        set_altitude(drone, altitude, throttle)
+        print('Final Height =', drone.height_from_pressure())
+        drone.hover(2)
+    except Exception as e:
+        print(e)
+    finally:
+        drone.land()
+        drone.close()
