@@ -14,10 +14,7 @@ ALTITUDE = 40
 drone = Drone()
 drone.pair()
 
-drone.set_initial_pressure()
-
-drone.takeoff()
-
 set_altitude(drone, ALTITUDE, THROTTLE)
 # drone.hover(3)
+drone.takeoff()
 fly_drone(drone, POWER, DISTANCE)
