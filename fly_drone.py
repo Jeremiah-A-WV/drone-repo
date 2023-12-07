@@ -1,3 +1,4 @@
+
 """
 This module contains a function that continuously calls a function
 is_object_detected, which returns a True if a sensor detects an object
@@ -8,6 +9,7 @@ the avoid_object function is invoked to take action.
 TEST TO ADJUST FORWARD_POWER TO YOUR LIKING
 """
 
+from set_altitude import *
 
 def is_object_detected(drone, within_a_distance):
     """
@@ -55,11 +57,17 @@ def fly_drone(drone, forward_power, distance_threshold):
     try:
         while True:
             drone.move()  # moves forward
+            print('--->',drone.get_front_range())
             if is_object_detected(drone, distance_threshold):  # if an object is detected within 60 cms
                 avoid_object(drone, forward_power)  # execute avoid_object() function
+            print('======>',drone.get_left_joystick_x())
+            if drone.get_left_joystick_x() > 0:
+                set_altitude(drone,20,20)
+
     except Exception as e:
         print(e)
         drone.set_pitch(0)  # set pitch to zero so the drone does not move
     finally:
         drone.land()  # when the try statement has concluded, land the drone
         drone.close()  # close the connection
+
