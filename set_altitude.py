@@ -9,7 +9,6 @@ def set_altitude(drone, altitude, throttle):
 
     drone.move()
     while sign * altitude > sign * current_altitude:
-        print(current_altitude)
         current_altitude = drone.height_from_pressure()
     drone.set_throttle(0)
 
