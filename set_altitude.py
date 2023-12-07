@@ -12,8 +12,6 @@ def set_altitude(drone, altitude, throttle):
         current_altitude = drone.height_from_pressure()
     drone.set_throttle(0)
 
-    drone.set_throttle(0)
-
 
 def read_final_height(drone, altitude, throttle):
 

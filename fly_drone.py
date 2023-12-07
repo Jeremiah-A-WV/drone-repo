@@ -46,7 +46,6 @@ def avoid_object(drone, forward_power):
         drone.turn_right(90)
     drone.hover(1)
     drone.set_pitch(forward_power)
-    drone.move(3)
 
 
 def fly_drone(drone, forward_power, distance_threshold):
