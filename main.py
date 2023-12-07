@@ -1,6 +1,5 @@
 from codrone_edu.drone import *
 from fly_drone import *
-from set_altitude import *
 
 # execute all necessary functions here
 # run set_altitude() first and then fly_drone()
@@ -14,6 +13,5 @@ ALTITUDE = 40
 drone = Drone()
 drone.pair()
 
-set_altitude(drone, ALTITUDE, THROTTLE)
-# drone.hover(3)
-fly_drone(drone, POWER, DISTANCE)
+
+fly_drone(drone, POWER, DISTANCE, ALTITUDE, THROTTLE)

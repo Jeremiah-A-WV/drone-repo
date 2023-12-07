@@ -1,3 +1,5 @@
+from set_altitude import *
+
 """
 This module contains a function that continuously calls a function
 is_object_detected, which returns a True if a sensor detects an object
@@ -49,7 +51,8 @@ def avoid_object(drone, forward_power):
     drone.set_pitch(forward_power)
 
 
-def fly_drone(drone, forward_power, distance_threshold):
+def fly_drone(drone, forward_power, distance_threshold, altitude, throttle):
+    set_altitude(drone, altitude, throttle)
     # drone.takeoff()
     drone.set_pitch(forward_power)
     try:
