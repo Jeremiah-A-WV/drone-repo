@@ -16,5 +16,4 @@ drone.pair()
 
 set_altitude(drone, ALTITUDE, THROTTLE)
 # drone.hover(3)
-drone.takeoff()
 fly_drone(drone, POWER, DISTANCE)

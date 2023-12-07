@@ -1,5 +1,6 @@
 def set_altitude(drone, altitude, throttle):
     drone.set_initial_pressure()
+    drone.takeoff()
     current_altitude = drone.height_from_pressure()
     if altitude <= current_altitude:
         sign = -1
