@@ -32,6 +32,7 @@ def avoid_object(drone, forward_power):
     """
     # code does not move if distance > 150
     drone.set_pitch(0)
+    drone.hover(1)
     drone.turn_left(90)
     left_turn = drone.get_front_range()
     drone.hover(1)
@@ -49,7 +50,7 @@ def avoid_object(drone, forward_power):
 
 
 def fly_drone(drone, forward_power, distance_threshold):
-    drone.takeoff()
+    # drone.takeoff()
     drone.set_pitch(forward_power)
     try:
         while True:
